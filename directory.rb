@@ -3,13 +3,13 @@ def input_students
   puts "To finish, just hit return twice"
 
   students = []
-  name = gets.chomp
+  name = gets.chomp!
 
   while !name.empty? do
     students << {name: name, cohort: :november}
     puts "Now we have #{students.count} students"
 
-    name = gets.chomp
+    name = gets.chomp!
   end
   students
 end
@@ -18,11 +18,24 @@ def print_header
   puts "The students of Villains Academy"
   puts "------------"
 end
+
 def print(students)
   students.each_with_index do |student, index|
     puts "#{index+1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
+
+def print_few(students)
+  puts " "
+  puts "Students with names beginning with T or less than 12 letters"
+  students.each do |student|
+    name = student[:name]
+    if name.length < 12 || name[0] == "T"
+      puts name
+    end
+  end
+end
+
 def print_footer(students)
   puts "Overall, we have #{students.count} great students."
 end
@@ -31,3 +44,4 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
+print_few(students)
